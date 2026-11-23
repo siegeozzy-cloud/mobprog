@@ -146,16 +146,54 @@ class NewsFeedCard extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             // Write a comment field.
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-              decoration: BoxDecoration(
-                color: AppColors.lightGrey,
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-              child: const CustomText(
-                text: 'Write a comment...',
-                color: AppColors.grey,
-              ),
+
+            Row(
+              children: [
+                // Your profile picture on the left.
+                CircleAvatar(
+                  radius: 16.r,
+                  backgroundColor: AppColors.lightGrey,
+                  backgroundImage: const AssetImage(
+                    'assets/images/shared_image.jpeg',
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                // The grey comment box takes the rest of the width.
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 8.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGrey,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: CustomText(
+                            text: 'Write a comment...',
+                            color: AppColors.grey,
+                          ),
+                        ),
+                        // Icons on the right side of the box.
+                        const Icon(
+                          Icons.camera_alt_outlined,
+                          color: AppColors.grey,
+                          size: 20,
+                        ),
+                        SizedBox(width: 8.w),
+                        const Icon(
+                          Icons.emoji_emotions_outlined,
+                          color: AppColors.grey,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
