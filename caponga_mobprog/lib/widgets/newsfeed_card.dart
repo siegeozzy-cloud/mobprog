@@ -203,7 +203,7 @@ class NewsFeedCard extends StatelessWidget {
 }
 
 // A small like, comment, or share button.
-class _ActionButton extends StatelessWidget {
+class _ActionButton extends StatefulWidget {
   const _ActionButton({
     required this.icon,
     required this.label,
@@ -215,14 +215,28 @@ class _ActionButton extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
+  State<_ActionButton> createState() => _ActionButtonState();
+}
+
+class _ActionButtonState extends State<_ActionButton> {
+  bool _isPressed = false;
+
+  @override
   Widget build(BuildContext context) {
+    final color = _isPressed ? AppColors.facebookBlue : AppColors.grey;
+
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        setState(() {
+          _isPressed = !_isPressed; // flip grey <-> blue
+        });
+        widget.onTap(); // still runs the original action (e.g. +1 like)
+      },
       child: Row(
         children: [
-          Icon(icon, color: AppColors.grey, size: 20),
+          Icon(widget.icon, color: color, size: 20),
           SizedBox(width: 6.w),
-          CustomText(text: label, color: AppColors.grey),
+          CustomText(text: widget.label, color: color),
         ],
       ),
     );
